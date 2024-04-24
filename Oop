@@ -1,0 +1,160 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Define classes for Teacher, Classroom, Section, Course, and Student
+
+class Teacher {
+public:
+    string name;
+
+    Teacher(string n) : name(n) {}
+};
+
+class Classroom {
+public:
+    string name;
+
+    Classroom(string n) : name(n) {}
+};
+
+class Section {
+public:
+    string name;
+    vector<string> students; // List of student names
+
+    Section(string n) : name(n) {}
+
+    void addStudent(string studentName) {
+        students.push_back(studentName);
+    }
+};
+
+class Course {
+public:
+    string name;
+    Teacher* teacher;
+    Classroom* classroom;
+    Section* section;
+
+    Course(string n, Teacher* t, Classroom* c, Section* s) : name(n), teacher(t), classroom(c), section(s) {}
+};
+
+class Student {
+public:
+    string name;
+
+    Student(string n) : name(n) {}
+};
+
+// Define the Timetable class
+
+class Timetable {
+private:
+    vector<Course*> courses;
+
+public:
+    void addCourse(Course* course) {
+        courses.push_back(course);
+    }
+
+    void displayTimetable() {
+        cout << "Timetable:\n";
+        for (Course* course : courses) {
+            cout << "Course: " << course->name << ", Teacher: " << course->teacher->name << ", Classroom: " << course->classroom->name << ", Section: " << course->section->name << ", Students: ";
+            for (const string& student : course->section->students) {
+                cout << student << ", ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    // Create Teachers
+    Teacher* teacherSE1 = new Teacher("Sir Tamim");
+    Teacher* teacherSE2 = new Teacher("Sir Waleed");
+    Teacher* teacherSE3 = new Teacher("Sir Awais");
+    Teacher* teacherSE4 = new Teacher("Ma'am Sadaf");
+    Teacher* teacherSE5 = new Teacher("Sir Adeel");
+    Teacher* teacherSE6 = new Teacher("Sir Zubair");
+    Teacher* teacherSE7 = new Teacher("Ma'am Joddat");
+    Teacher* teacherSE8 = new Teacher("Sir Raja");
+    // Add more teachers as needed
+
+    // Create Classrooms
+    Classroom* classroom1 = new Classroom("Room 4-17");
+    Classroom* classroom2 = new Classroom("Room 4-18");
+    Classroom* classroom3 = new Classroom("Room 4-19");
+    // Add more classrooms as needed
+
+    // Create Sections
+    Section* section1 = new Section("A");
+    section1->addStudent("John");
+    section1->addStudent("Alice");
+    section1->addStudent("Bob");
+
+    Section* section2 = new Section("B");
+    section2->addStudent("Emily");
+    section2->addStudent("Mike");
+    section2->addStudent("Sophia");
+
+    Section* section3 = new Section("C");
+    section3->addStudent("David");
+    section3->addStudent("Emma");
+    section3->addStudent("Olivia");
+    // Add more sections as needed
+
+    // Create Courses
+    Course* course1 = new Course("OOP", teacherSE1, classroom1, section1);
+    Course* course2 = new Course("OOP Lab", teacherSE2, classroom2, section1);
+    Course* course3 = new Course("ISE", teacherSE3, classroom3, section1);
+    Course* course4 = new Course("DS", teacherSE4, classroom1, section2);
+    Course* course5 = new Course("Calculus", teacherSE5, classroom2, section2);
+    Course* course6 = new Course("LA", teacherSE6, classroom1, section3);
+    Course* course7 = new Course("CF", teacherSE7, classroom3, section3);
+    Course* course8 = new Course("CP", teacherSE8, classroom3, section3);
+    // Add more courses as needed
+
+    // Create a Timetable and add courses
+    Timetable timetable;
+    timetable.addCourse(course1);
+    timetable.addCourse(course2);
+    timetable.addCourse(course3);
+    timetable.addCourse(course4);
+    timetable.addCourse(course5);
+    timetable.addCourse(course6);
+    timetable.addCourse(course7);
+    timetable.addCourse(course8);
+    // Add more courses to the timetable as needed
+
+    // Display the timetable
+    timetable.displayTimetable();
+
+    // Clean up memory
+    delete teacherSE1;
+    delete teacherSE2;
+    delete teacherSE3;
+    delete teacherSE4;
+    delete teacherSE5;
+    delete teacherSE6;
+    delete teacherSE7;
+    delete teacherSE8;
+    delete classroom1;
+    delete classroom2;
+    delete classroom3;
+    delete section1;
+    delete section2;
+    delete section3;
+    delete course1;
+    delete course2;
+    delete course3;
+    delete course4;
+    delete course5;
+    delete course6;
+    delete course7;
+    delete course8;
+    return 0;
+}
